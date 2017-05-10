@@ -1,5 +1,4 @@
 logLevel := Level.Warn
-addSbtPlugin("org.wartremover" % "sbt-wartremover" % "1.1.1")
-addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "2.5.0")
+addSbtPlugin("org.wartremover" % "sbt-wartremover" % "2.0.3")
 
-
+addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "+")

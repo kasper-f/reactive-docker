@@ -1,7 +1,6 @@
 package edu.cornell.cac.docker.api
 
 import dispatch._
-import Defaults._
 import play.api.libs.iteratee.Enumerator
 import play.api.libs.json._
 import edu.cornell.cac.docker.api.entities.ContainerId
@@ -33,7 +32,7 @@ sealed trait DockerClient extends DockerApi {
   
   private def nullConsumer(hdr: DockerResponseHeaders) =  Iteratee.ignore[Array[Byte]]
   
-  final def httpRequest(req: dispatch.Req)(implicit docker: DockerClient): Future[Either[Throwable, String]] = {
+  final def httpRequest(req: dispatch.Req)(implicit docker: DockerClient, ec: ExecutionContext): Future[Either[Throwable, String]] = {
     log.debug(s"httpRequest: $req")
     Http(req).either.map{
       case Right(resp) if Seq(200, 201, 202).contains(resp.getStatusCode) => Right(resp.getResponseBody())
@@ -48,7 +47,7 @@ sealed trait DockerClient extends DockerApi {
     }
   }
   
-  final def dockerJsonRequest[T](req: dispatch.Req)(implicit docker: DockerClient, fmt: Format[T]): Future[Either[Throwable, T]] = {
+  final def dockerJsonRequest[T](req: dispatch.Req)(implicit docker: DockerClient, fmt: Format[T], ec: ExecutionContext): Future[Either[Throwable, T]] = {
     log.debug(s"dockerJsonRequest: $req")
     Http(req).either.map{
       case Right(resp) if Seq(200, 201, 202).contains(resp.getStatusCode) =>
@@ -73,7 +72,7 @@ sealed trait DockerClient extends DockerApi {
   }
   
   final def dockerRequest(req: dispatch.Req)
-  (implicit docker: DockerClient):
+  (implicit docker: DockerClient, ec: ExecutionContext):
   Future[Either[Throwable, com.ning.http.client.Response]] = {
     log.info(s"dockerRequest: ${req.url}\n ${req.toRequest.getStringData}")
     Http(req).either.recover{
@@ -152,7 +151,7 @@ sealed trait DockerClient extends DockerApi {
           iteratee = null
           // Must close underlying connection, otherwise async http client will drain the stream
           log.debug(s"${req.url} doneOrError - closing connection")
-          bodyPart.markUnderlyingConnectionAsClosed()
+          bodyPart.markUnderlyingConnectionAsToBeClosed()
           STATE.ABORT
         }
       }

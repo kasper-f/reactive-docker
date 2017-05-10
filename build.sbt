@@ -4,43 +4,43 @@ addCompilerPlugin("org.scalamacros" %% "paradise" % "2.1.0" cross CrossVersion.f
 
 lazy val commonSettings = Seq(
   name := "reactive-docker",
-  organization := "edu.cornell.cac",
-  version := "0.1-SNAPSHOT",
-  scalaVersion := "2.11.8"
+  organization := "com.asergo",
+  version := "0.1",
+  scalaVersion := "2.12.2"
 )
 
-lazy val logbackVer = "1.0.9"
+lazy val logbackVer = "1.2.3"
 
 lazy val root = (project in file(".")).
   configs(IntegrationTest).
   settings(commonSettings: _*).
   settings(Defaults.itSettings: _*).
   settings(
-    resolvers ++= Seq(
-      Resolver.mavenLocal,
+  /*  resolvers ++= Seq(
+    pub   Resolver.mavenLocal,
       Resolver.sonatypeRepo("snapshots"),
       Resolver.sonatypeRepo("releases"),
       Resolver.typesafeRepo("releases"),
       Resolver.typesafeRepo("snapshots")
       //"Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases",
       //"spray repo" at "http://repo.spray.io"
-    ),
+    ),*/
     libraryDependencies ++= Seq(
     //"org.scalaxb" % "scalaxb_2.11" % "1.4.1",
     // "co.fs2" %% "fs2-core" % "0.9.0-RC2",
     "com.chuusai" %% "shapeless" % "2.3.2",
     //"org.scalaz.stream" %% "scalaz-stream" % "0.3.1",
-    "com.netaporter" %% "scala-uri" % "0.4.2",
-    "com.typesafe.play" %% "play-json" % "2.5.5",
-    "com.typesafe.play" %% "play-iteratees" % "2.5.5",
+    "com.netaporter" %% "scala-uri" % "0.4.16",
+    "com.typesafe.play" %% "play-json" % "2.6.0-M7",
+    "com.typesafe.play" %% "play-iteratees" % "2.6.1",
     // "com.typesafe.akka" %% "akka-actor" % "2.4-SNAPSHOT",
-    "net.databinder.dispatch" %% "dispatch-core" % "0.11.2",
+    "net.databinder.dispatch" %% "dispatch-core" % "0.12.0",
     "ch.qos.logback" % "logback-core" % logbackVer,
     "ch.qos.logback" % "logback-classic" % logbackVer,
-    "org.apache.commons" % "commons-compress" % "1.8.1",
+    "org.apache.commons" % "commons-compress" % "1.13",
 
-    "org.specs2" %% "specs2" % "3.7" % "it,test",
-    "org.skyscreamer" % "jsonassert" % "1.3.0" % "it,test"
+    "org.specs2" %% "specs2" % "2.4.17" % "it,test",
+    "org.skyscreamer" % "jsonassert" % "1.5.0" % "it,test"
 
   ),
   // other settings here
@@ -92,7 +92,7 @@ lazy val root = (project in file(".")).
   scalacOptions ++= Seq("-deprecation","-language:_"),
 
 
-  javacOptions ++= Seq("-target", "1.6", "-source","1.6"),
+  javacOptions ++= Seq("-target", "1.8", "-source","1.8"),
 
 
   // see https://github.com/typesafehub/scalalogging/issues/23

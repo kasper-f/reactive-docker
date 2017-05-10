@@ -19,7 +19,7 @@ class DockerApiJsonSpec extends Specification  { def is =
 
     Testing ContainerConfiguration
      Simple volume check: $hc1CfgTest
-  """.stripMargin
+  """
 
   // JSONCompare.compareJSON(expectedStr, actualStr, compareMode)
   lazy val dummyTestPass1 = compareJsonLenient(
