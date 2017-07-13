@@ -25,8 +25,8 @@ Add the following to your build.sbt:
 Sample Usage
 ==================
 ```
-import com.kolor.docker.api._
-import com.kolor.docker.api.json.Formats._
+import edu.cornell.cac.docker.api._
+import edu.cornell.cac.docker.api.json.Formats._
 import scala.concurrent.ExecutionContext.Implicits.global
 
 
@@ -37,17 +37,20 @@ val maybeContainers = docker.containers()
 
 for {
 	images <- maybeImages
-	containers <- maybeContainers} yield {
-	images.map(i => println(s"Image: $i"))	containers.map(c => println(s"Container: $c"))}
+	containers <- maybeContainers
+} yield {
+	images.map(i => println(s"Image: $i"))
+	containers.map(c => println(s"Container: $c"))
+}
 
 ```
 
 create a new container from busybox image and start it:
 
 ```
-import com.kolor.docker.api._
-//import com.kolor.docker.api.json.Formats._		// use this for API version < v1.12
-import com.kolor.docker.api.json.FormatsV112._		// use this for API versions v1.12+
+import edu.cornell.cac.docker.api._
+//import edu.cornell.cac.docker.api.json.Formats._		// use this for API version < v1.12
+import edu.cornell.cac.docker.api.json.FormatsV112._		// use this for API versions v1.12+
 import scala.concurrent.duration.Duration
 import scala.concurrent.Await
 import play.api.libs.iteratee._

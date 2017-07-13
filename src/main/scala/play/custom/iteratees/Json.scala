@@ -164,12 +164,12 @@ import Combinators._
   /**
    * Creates a JSON object from a key value iteratee
    */
-  def jsonObjectCreator: Iteratee[(String, JsValue), JsObject] = Iteratee.getChunks.map(keyValues => new JsObject(keyValues))
+  def jsonObjectCreator: Iteratee[(String, JsValue), JsObject] = Iteratee.getChunks.map(keyValues => new JsObject(keyValues.toMap))
 
   /**
    * Creates a JSON array from a key value iteratee
    */
-  def jsonArrayCreator: Iteratee[JsValue, JsArray] = Iteratee.getChunks.map(values => new JsArray(values))
+  def jsonArrayCreator: Iteratee[JsValue, JsArray] = Iteratee.getChunks.map(values => new JsArray(values.toIndexedSeq))
 
   //
   // JSON parsing
