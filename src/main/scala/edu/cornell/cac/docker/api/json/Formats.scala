@@ -4,6 +4,8 @@ import play.api.libs.json._
 import edu.cornell.cac.docker.api.entities._
 import play.api.libs.functional.syntax._
 import org.joda.time.DateTime
+import play.api.libs.json.JodaWrites._
+import play.api.libs.json.JodaReads._
 
 class ISODateTimeString(string: String) {
   def isoDateTime: DateTime = try {

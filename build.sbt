@@ -5,7 +5,7 @@ addCompilerPlugin("org.scalamacros" %% "paradise" % "2.1.0" cross CrossVersion.f
 lazy val commonSettings = Seq(
   name := "reactive-docker",
   organization := "com.asergo",
-  version := "0.1",
+  version := "0.1.1",
   scalaVersion := "2.12.2"
 )
 
@@ -31,7 +31,8 @@ lazy val root = (project in file(".")).
     "com.chuusai" %% "shapeless" % "2.3.2",
     //"org.scalaz.stream" %% "scalaz-stream" % "0.3.1",
     "com.netaporter" %% "scala-uri" % "0.4.16",
-    "com.typesafe.play" %% "play-json" % "2.6.0-M7",
+    "com.typesafe.play" %% "play-json" % "2.6.2",
+     "com.typesafe.play" %% "play-json-joda" % "2.6.2",
     "com.typesafe.play" %% "play-iteratees" % "2.6.1",
     // "com.typesafe.akka" %% "akka-actor" % "2.4-SNAPSHOT",
     "net.databinder.dispatch" %% "dispatch-core" % "0.12.0",

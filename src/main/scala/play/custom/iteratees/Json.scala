@@ -169,7 +169,7 @@ import Combinators._
   /**
    * Creates a JSON array from a key value iteratee
    */
-  def jsonArrayCreator: Iteratee[JsValue, JsArray] = Iteratee.getChunks.map(values => new JsArray(values))
+  def jsonArrayCreator: Iteratee[JsValue, JsArray] = Iteratee.getChunks.map(values => new JsArray(values.toIndexedSeq))
 
   //
   // JSON parsing
